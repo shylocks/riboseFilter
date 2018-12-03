@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>16</number>
+    </property>
+    <property name="topMargin">
+     <number>16</number>
+    </property>
+    <property name="rightMargin">
+     <number>16</number>
+    </property>
+    <property name="bottomMargin">
+     <number>16</number>
+    </property>
+    <item row="5" column="1">
+     <layout class="QGridLayout" name="grid_layout">
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <item row="7" column="4">
+       <widget class="QCheckBox" name="annotate_checkbox">
+        <property name="text">
+         <string>annotate</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="4">
+       <widget class="QLabel" name="contour_color_label">
+        <property name="text">
+         <string>Contours Color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="5">
+       <widget class="QCheckBox" name="filled_checkbox">
+        <property name="text">
+         <string>filled</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QLineEdit" name="threshold_line">
+        <property name="text">
+         <string>4.5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="4">
+       <widget class="QLabel" name="dim_label">
+        <property name="text">
+         <string>dim</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="6">
+       <widget class="QPushButton" name="options_btn">
+        <property name="text">
+         <string>Change</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QLabel" name="threshold_label">
+        <property name="text">
+         <string>Threshold</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="4">
+       <widget class="QCheckBox" name="black_checkbox">
+        <property name="text">
+         <string>black background</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="5">
+       <widget class="QLineEdit" name="contour_color_line">
+        <property name="text">
+         <string>w</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="5">
+       <widget class="QLineEdit" name="dim_line">
+        <property name="text">
+         <string>auto</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="options_label">
+        <property name="text">
+         <string>Options:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="3">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="6" column="0">
+     <layout class="QHBoxLayout" name="horizontal_layout_2">
+      <item>
+       <widget class="QLabel" name="image_slice_label_2">
+        <property name="text">
+         <string>Slice 0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="image_slider_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <layout class="QHBoxLayout" name="horizontal_layout_1">
+      <item>
+       <widget class="QLabel" name="image_slice_label_0">
+        <property name="text">
+         <string>Slice 0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="image_slider_0">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_viewer_2">
+      <property name="text">
+       <string>Axial slice</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="CursorGraphicsView" name="image_viewer_2">
+      <property name="cursor" stdset="0">
+       <cursorShape>CrossCursor</cursorShape>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_viewer_1">
+      <property name="text">
+       <string>Sagittal slice</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="CursorGraphicsView" name="image_viewer_0">
+      <property name="cursor" stdset="0">
+       <cursorShape>CrossCursor</cursorShape>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="CursorGraphicsView" name="image_viewer_1">
+      <property name="cursor" stdset="0">
+       <cursorShape>CrossCursor</cursorShape>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <layout class="QHBoxLayout" name="horizontal_layout_0">
+      <item>
+       <widget class="QLabel" name="image_slice_label_1">
+        <property name="text">
+         <string>Slice 0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSlider" name="image_slider_1">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="6" column="1">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="html_2d">
+        <property name="text">
+         <string>Interactive html viewer</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="html_3d">
+        <property name="text">
+         <string>Surface html viewer</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLabel" name="label_viewer_0">
+      <property name="text">
+       <string>Coronal slice</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1280</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="action_Open"/>
+    <addaction name="action_Exit"/>
+   </widget>
+   <widget class="QMenu" name="menuSlice">
+    <property name="title">
+     <string>&amp;Slice</string>
+    </property>
+    <addaction name="action_Save_sagittal_slice"/>
+    <addaction name="action_Save_coronal_slice"/>
+    <addaction name="action_Save_transverse_slice"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuSlice"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_Open">
+   <property name="text">
+    <string>&amp;Open</string>
+   </property>
+  </action>
+  <action name="action_Exit">
+   <property name="text">
+    <string>&amp;Exit</string>
+   </property>
+  </action>
+  <action name="action_Save">
+   <property name="text">
+    <string>&amp;Save</string>
+   </property>
+  </action>
+  <action name="action_Delete">
+   <property name="text">
+    <string>&amp;Delete</string>
+   </property>
+  </action>
+  <action name="action_Save_coronal_slice">
+   <property name="text">
+    <string>Save &amp;coronal slice</string>
+   </property>
+  </action>
+  <action name="action_Save_sagittal_slice">
+   <property name="text">
+    <string>Save &amp;sagittal slice</string>
+   </property>
+  </action>
+  <action name="action_Save_transverse_slice">
+   <property name="text">
+    <string>Save &amp;axial slice</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CursorGraphicsView</class>
+   <extends>QGraphicsView</extends>
+   <header>CursorGraphicsView.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>action_Exit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

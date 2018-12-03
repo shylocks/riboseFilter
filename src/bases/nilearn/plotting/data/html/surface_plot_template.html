@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>surface plot</title>
+    <meta charset="UTF-8" />
+    INSERT_JS_LIBRARIES_HERE
+
+    <script>
+        var surfaceMapInfo = INSERT_STAT_MAP_JSON_HERE;
+
+        function makePlot(surface, hemisphere, divId) {
+
+            decodeHemisphere(surfaceMapInfo, surface, hemisphere);
+            info = surfaceMapInfo[surface + "_" + hemisphere];
+            info["type"] = "mesh3d";
+            info["vertexcolor"] = surfaceMapInfo["vertexcolor_" + hemisphere];
+
+            let data = [info];
+
+            info['lighting'] = getLighting();
+            let layout = getLayout("surface-plot", "select-view",
+                                   surfaceMapInfo["black_bg"]);
+            let config = getConfig();
+
+            Plotly.react(divId, data, layout, config);
+
+            addColorbar(surfaceMapInfo["colorscale"],
+                        surfaceMapInfo["cmin"],
+                        surfaceMapInfo["cmax"],
+                        divId, layout, config);
+        }
+
+        function addPlot() {
+
+            let hemisphere = $("#select-hemisphere").val();
+            let kind = $("#select-kind").val();
+            makePlot(kind, hemisphere, "surface-plot");
+        }
+
+        function surfaceRelayout(){
+            return updateLayout("surface-plot", "select-view",
+                                surfaceMapInfo["black_bg"]);
+        }
+
+    </script>
+    <script>
+        $(document).ready(
+            function() {
+                if(surfaceMapInfo["full_brain_mesh"]){
+                    $("#select-hemisphere").change(addPlot);
+                    $("#select-kind").change(addPlot);
+                }
+                else{
+                    $("#select-hemisphere").hide();
+                    $("#select-kind").hide();
+                }
+                addPlot();
+                $("#select-view").change(surfaceRelayout);
+                $("#surface-plot").mouseup(function() {
+                    $("#select-view").val("custom");
+                });
+                $(window).resize(surfaceRelayout);
+
+            });
+    </script>
+</head>
+
+<body>
+    <div id="surface-plot"></div>
+
+    <select id="select-hemisphere">
+        <option value="left">左半脑</option>
+        <option value="right">右半脑</option>
+    </select>
+
+    <select id="select-kind">
+        <option value="inflated">膨胀</option>
+        <option value="pial">软膜</option>
+    </select>
+
+    <select id="select-view">
+        <option value="left">视图: 左边</option>
+        <option value="right">视图: 右边</option>
+        <option value="front">视图: 正面</option>
+        <option value="back">视图: 背部</option>
+        <option value="top">视图: 顶部</option>
+        <option value="bottom">视图: 底部</option>
+        <option value="custom">视图: -</option>
+    </select>
+
+</body>
+
+</html>
