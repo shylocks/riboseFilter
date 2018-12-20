@@ -14,7 +14,7 @@ from PIL import Image
 from PyQt5 import uic
 from PyQt5.QtCore import QPointF, QRegExp
 from PyQt5.QtWidgets import QApplication, QFileDialog, QGraphicsScene, QGraphicsView, QLabel, QListView, QMainWindow, \
-    QSlider, QPushButton, QLineEdit, QCheckBox
+    QSlider, QPushButton, QLineEdit, QCheckBox, QListWidget
 from CursorGraphicsView import CursorGraphicsView
 
 
@@ -46,22 +46,39 @@ class MainWindow(QMainWindow):
 
         self.threshold_line = self.findChildren(QLineEdit, QRegExp("threshold_line"))[0]
         self.threshold = float(self.threshold_line.text())
+
         self.contour_color_line = self.findChildren(QLineEdit, QRegExp("contour_color_line"))[0]
         self.contour_color = self.contour_color_line.text()
+
         self.dim_line = self.findChildren(QLineEdit, QRegExp("dim_line"))[0]
         self.dim = self.dim_line.text()
+
         self.black_bg_checkbox = self.findChildren(QCheckBox, QRegExp("black_checkbox"))[0]
         self.black_bg = self.black_bg_checkbox.isChecked()
+
         self.filled_checkbox = self.findChildren(QCheckBox, QRegExp("filled_checkbox"))[0]
         self.filled = self.filled_checkbox.isChecked()
+
         self.annotate_checkbox = self.findChildren(QCheckBox, QRegExp("annotate_checkbox"))[0]
         self.annotate = self.annotate_checkbox.isChecked()
+
+        self.bg_list = self.findChildren(QListWidget, QRegExp("bg_list"))[0]
+        self.bg_list_value = []
+        self.bg_img = ""
+        self.get_bg_list()
 
         self.setWindowTitle('Nii')
         self.show()
         # redraw viewers whenever a slider is moved
         for i in range(3):
             self.image_sliders[i].valueChanged.connect(lambda value, i=i: self.draw_viewer(i))
+
+    def get_bg_list(self):
+        self.bg_list_value = [i for i in os.listdir("canonical/")]
+        if len(self.bg_list_value):
+            self.bg_list.addItems(self.bg_list_value)
+            self.bg_list.setCurrentRow(0)
+            self.bg_img = self.bg_list_value[0]
 
     def html_3d_change(self):
         if not self.stat_img:
@@ -85,6 +102,7 @@ class MainWindow(QMainWindow):
         view.save_as_html(file_info[0])
 
     def option_change(self):
+        print(self.bg_list.currentRow())
         # if not open
         if self.stat_img is None:
             return
@@ -95,8 +113,10 @@ class MainWindow(QMainWindow):
         self.contour_color = self.contour_color_line.text()
         self.threshold = float(self.threshold_line.text())
         self.annotate = self.annotate_checkbox.isChecked()
+        self.bg_img = self.bg_list_value[self.bg_list.currentRow()]
         for i, viewer in enumerate(self.image_viewers):
             self.draw_viewer(i)
+
     def open_file(self):
         file_info = QFileDialog.getOpenFileName(parent=self, directory=os.path.expanduser('~'), filter='*.nii *.nii.gz')
         if not os.path.isfile(file_info[0]):
@@ -167,11 +187,17 @@ class MainWindow(QMainWindow):
         j = slice_range[num_slider] - self.offset[num_slider]
         self.image_labels[num_slider].setText(self.tr("Slice " + str(j)))
         file_path = self.roaming_path + '_' + d + '_' + str(j) + '_' + self.contour_color + '_' + str(
-            self.threshold) + '_' + str(self.black_bg) + '_' + str(self.filled) + '_' + str(self.annotate) + '.png'
+            self.threshold) + '_' + str(self.black_bg) + '_' + str(self.filled) + '_' + str(self.annotate) + "_"+self.bg_img+'.png'
         if file_path not in self.img_list:
             self.img_list.append(file_path)
-            display = plotting.plot_anat(self.stat_img, display_mode=d, cut_coords=[j], black_bg=self.black_bg,
-                                         dim=str(self.dim), annotate=self.annotate)
+            '''#enable non background picture view
+            display = plotting.plot_anat(self.stat_img, display_mode=d,
+                                             cut_coords=[j], black_bg=self.black_bg,
+                                             dim=str(self.dim), annotate=self.annotate)
+            '''
+            display = plotting.plot_stat_map(self.stat_img, bg_img="canonical/"+self.bg_img, display_mode=d,
+                                             cut_coords=[j], black_bg=self.black_bg,
+                                             dim=str(self.dim), annotate=self.annotate)
             display.add_contours(self.stat_img, levels=[self.threshold], colors=self.contour_color,
                                  filled=self.filled, )
             display.savefig(file_path)
