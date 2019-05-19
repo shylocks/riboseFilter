@@ -1,4 +1,7 @@
-﻿# User guide:
+﻿# 前言
+ Pyqt5的动手实践，主要调用了nilearn库的函数对CT图像文件进行了处理。下面的选项均出自nilearn的官方文档。  
+ 
+ # User guide:
 * Step 1: Click 'File' on the menuBar, choose '*.nii' file to open.
 * Step 2: Use Sliders or Cursors to change slices.
 * Step 3: Click 'Slice' on the menuBar, save '*.png' files.
